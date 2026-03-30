@@ -25,7 +25,7 @@ export class DonationController {
 
   update = (req: Request, res: Response) => {
     try {
-      const { id } = req.params;
+      const id = req.params.id as string;
       const donationData = req.body;
       const updatedDonation = donationService.update(id, donationData);
       
@@ -37,7 +37,7 @@ export class DonationController {
 
   delete = (req: Request, res: Response) => {
     try {
-      const { id } = req.params;
+      const id = req.params.id as string;
       donationService.delete(id);
       
       return res.status(204).send();
