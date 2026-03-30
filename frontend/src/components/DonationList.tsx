@@ -18,12 +18,14 @@ interface DonationListProps {
   onDonationDeleted: () => void;
 }
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3333/api';
+
 export function DonationList({ onEdit, onDonationDeleted }: DonationListProps) {
   const [donations, setDonations] = useState<DonationItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/donations`)
+    fetch(`${API_URL}/donations`)
       .then((res) => res.json())
       .then((data) => {
         setDonations(data);
@@ -35,7 +37,7 @@ export function DonationList({ onEdit, onDonationDeleted }: DonationListProps) {
     if (!confirm('Tem certeza que deseja excluir esta doação?')) return;
 
     try {
-      await fetch(`http://localhost:3333/api/donations/${id}`, { method: 'DELETE' });
+      await fetch(`${API_URL}/donations/${id}`, { method: 'DELETE' });
       onDonationDeleted();
     } catch {
       alert('Erro ao excluir doação');

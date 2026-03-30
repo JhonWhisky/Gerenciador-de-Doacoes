@@ -54,9 +54,9 @@ export function DonationForm({ onSuccess, donationToEdit, clearEdit }: DonationF
     };
 
     try {
-      const url = editData 
-        ? `${import.meta.env.VITE_API_URL}/donations/${editData.id}` 
-        : `${import.meta.env.VITE_API_URL}/donations`;
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3333/api';
+
+      const url = editData ? `${API_URL}/donations/${editData.id}` : `${API_URL}/donations`;
       
       const method = editData ? 'PUT' : 'POST';
 
